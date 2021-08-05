@@ -10,7 +10,7 @@ class Auth:
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ Require auth public method"""
 
-        if path is None or excluded_paths is None or excluded_paths = []:
+        if path is None or excluded_paths is None or excluded_paths == []:
             return True
 
         lenPath = len(path)
