@@ -41,7 +41,7 @@ class DB:
 
         return user
 
-    def find_user_by(self, *kwargs):
+    def find_user_by(self, *kwargs)->User:
         """find user by method return first row founded"""
         if not kwargs:
             raise InvalidRequestError
