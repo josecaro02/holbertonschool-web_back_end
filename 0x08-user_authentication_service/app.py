@@ -33,25 +33,21 @@ def register_user() -> str:
 
 
 @app.route('/sessions', methods=['POST'])
-def log_in() -> str:
-    """ Logs in a user and returns session ID """
-    try:
-        email = request.form['email']
-        password = request.form['password']
-    except KeyError:
-        abort(400)
-
-    if not AUTH.valid_login(email, password):
+def login():
+    """Login users"""
+    req_par = request.form
+    email = req_par.get('email')
+    password = req_par.get('password')
+    if AUTH.valid_login(email, password):
+        session_id = AUTH.create_session(email)
+        if not session_id:
+            abort(401)
+        msg = {"email": email, "message": "logged in"}
+        output = jsonify(msg)
+        output.set_cookie("session_id", session_id)
+        return output
+    else:
         abort(401)
-
-    session_id = AUTH.create_session(email)
-
-    msg = {"email": email, "message": "logged in"}
-    response = jsonify(msg)
-
-    response.set_cookie("session_id", session_id)
-
-    return response
 
 
 if __name__ == "__main__":
