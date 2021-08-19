@@ -93,8 +93,8 @@ class Auth:
 
         return None
 
-
-    def get_reset_password_token(self, email: str) -> str:
+    def get_reset_password_token(self, email: str
+                                 ) -> str:
         """Generates a reset password token if user exists"""
         try:
             user = self._db.find_user_by(email=email)
@@ -107,7 +107,8 @@ class Auth:
 
         return reset_token
 
-    def update_password(self, reset_token: str, password: str) -> None:
+    def update_password(self, reset_token: str,
+                        password: str) -> None:
         """Uses reset token to validate update of users password"""
         if reset_token is None or password is None:
             return None
