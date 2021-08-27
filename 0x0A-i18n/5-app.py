@@ -40,7 +40,7 @@ def get_user() -> Union[dict, None]:
     try:
         login = request.args.get('login_as')
         user = users[int(login)]
-    except:
+    except Exception:
         user = None
 
     return user
